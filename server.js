@@ -25,18 +25,31 @@ http.createServer(function (req, res) {
     data.push(chunk)
   })
   req.on('end', () => {
+	  
+	  try{
     var dat = JSON.parse(data);
-	carbone.render('./test.docx', dat, function(err, result){
-    if (err) {
-      return console.log(err);
-    }
-    // write the result
-    fs.writeFileSync('name.docx', result);
+	
+    fs.writeFile('name.docx', result);
 	
 	res.writeHead(200, {'Content-Type': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
 	"Access-Control-Allow-Origin":"*"});
     res.write(result);
     return res.end();
+	  }catch(e){
+		  
+	  
+	  fs.readFile('name.docx', function(err, data) {
+    res.writeHead(200, {'Content-Type': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'});
+    res.write(data);
+    return res.end();
+  });
+	  }
+	carbone.render('./test.docx', dat, function(err, result){
+    if (err) {
+      return console.log(err);
+    }
+    // write the result
+	
     
   });
 	

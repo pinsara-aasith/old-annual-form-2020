@@ -18,24 +18,34 @@ var data = {
 };
 xmlhttp.send(JSON.stringify(data));
 }
+ 
 
 
-async function renderReportAndGetRenderId() 
+function renderReportAndGetRenderId() 
 {
-loadXMLDoc(function()
+	alert("ok");
+var val = {
+	token:"yet",
+  firstname : 'Pinsra',
+  lastname : 'Aasith'
+};
+	
+ loadXMLDoc(function()
   {
   if (xmlhttp.readyState==4 && xmlhttp.status==200)
-    {
+    { 
+	var blob = new Blob([xmlhttp.response], { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
+    var url = window.URL.createObjectURL(blob);
 		 var a = document.createElement('a');
-            var url = window.URL.createObjectURL(xmlhttp.response);
+		 alert(xmlhttp.response);
             a.href = url;
-            a.download = 'download.pdf';
+            a.download = 'downloaeed.docx';
             document.body.append(a);
             a.click();
             a.remove();
             window.URL.revokeObjectURL(url);
 			
     }
-  });
+  }); 
 }
 
