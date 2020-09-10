@@ -12,7 +12,6 @@ var data = {
 var http = require('http');
 
 http.createServer(function (req, res) {
-  res.writeHead(200, {'Content-Type': 'text/html'});
   const fs = require('fs');
   const carbone = require('carbone');
 
@@ -34,7 +33,8 @@ http.createServer(function (req, res) {
     // write the result
     fs.writeFileSync('name.docx', result);
 	
-	res.writeHead(200, {'Content-Type': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'});
+	res.writeHead(200, {'Content-Type': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+	"Access-Control-Allow-Origin":*});
     res.write(result);
     return res.end();
     
