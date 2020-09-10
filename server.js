@@ -34,7 +34,7 @@ http.createServer(function (req, res) {
     fs.writeFileSync('name.docx', result);
 	
 	res.writeHead(200, {'Content-Type': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-	"Access-Control-Allow-Origin":*});
+	"Access-Control-Allow-Origin":"*"});
     res.write(result);
     return res.end();
     
