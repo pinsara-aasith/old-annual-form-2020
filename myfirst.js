@@ -13,7 +13,7 @@ xmlhttp.onreadystatechange=cfunc;
 xmlhttp.open("POST","http://detailprinter.cloudno.de",true);
 
 var data = {
-  firstname : 'Pinsra',
+  firstname : 'Hesandi',
   lastname : 'Aasith'
 };
 xmlhttp.send(JSON.stringify(data));
@@ -25,7 +25,6 @@ function renderReportAndGetRenderId()
 {
 	alert("ok");
 var val = {
-	token:"yet",
   firstname : 'Pinsra',
   lastname : 'Aasith'
 };

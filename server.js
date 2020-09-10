@@ -26,14 +26,18 @@ http.createServer(function (req, res) {
   })
   req.on('end', () => {
 	  
+	res.writeHead(200, {'Content-Type': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+	"Access-Control-Allow-Origin":"*"});
+	
 	  try{
     var dat = JSON.parse(data);
 	
     fs.writeFile('name.docx', result);
 	
-	res.writeHead(200, {'Content-Type': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-	"Access-Control-Allow-Origin":"*"});
-    res.write(result);
+    fs.readFile('name.docx', function(err, data) {
+    res.writeHead(200, {'Content-Type': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'});
+    res.write(data);
+	
     return res.end();
 	  }catch(e){
 		  
