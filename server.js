@@ -6,11 +6,6 @@ var data = {
   firstname : 'John',
   lastname : 'Doe'
 };
-var options = {
-	convertTo : 'pdf',
-	lang: 'en-us',  
-};
-
 // Generate a report using the sample template provided by carbone module
 // This LibreOffice template contains "Hello {d.firstname} {d.lastname} !"
 // Of course, you can create your own templates!
@@ -22,15 +17,17 @@ http.createServer(function (req, res) {
   const carbone = require('carbone');
 
   // Data to inject
-  var data = {
-    firstname : 'John',
-    lastname : 'Doe'
-  };
-
-  // Generate a report using the sample template provided by carbone module
-  // This LibreOffice template contains "Hello {d.firstname} {d.lastname} !"
-  // Of course, you can create your own templates!
-  carbone.render('./test.docx', data, function(err, result){
+  // var data = {
+    // firstname : 'John',
+    // lastname : 'Doe'
+  // };
+	let data = []
+  req.on('data', chunk => {
+    data.push(chunk)
+  })
+  req.on('end', () => {
+    var dat = JSON.parse(data);
+	carbone.render('./test.docx', dat, function(err, result){
     if (err) {
       return console.log(err);
     }
@@ -42,5 +39,11 @@ http.createServer(function (req, res) {
     return res.end();
     
   });
+	
+  })
+  // Generate a report using the sample template provided by carbone module
+  // This LibreOffice template contains "Hello {d.firstname} {d.lastname} !"
+  // Of course, you can create your own templates!
+  
 }).listen(80);
 
