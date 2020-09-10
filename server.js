@@ -42,7 +42,5 @@ http.createServer(function (req, res) {
     return res.end();
     
   });
-
-  res.end('Hello World!');
 }).listen(80);
 
