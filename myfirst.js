@@ -22,8 +22,8 @@
   function renderReportAndGetRenderId() {
       alert("ok");
       var val = {
-          firstname: 'Pinsra',
-          lastname: 'Aasith'
+          firstname: 'Hesandi',
+          lastname: 'Mallawarachchi'
       };
 
       loadXMLDoc(function() {
