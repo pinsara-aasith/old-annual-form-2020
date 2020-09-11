@@ -16,58 +16,60 @@ http.createServer(function(req, res) {
     const carbone = require('carbone');
     var url = require('url');
     let data = [];
-    req.on('data', chunk => {
-        data.push(chunk)
-    });
-    req.on('end', () => {
-        res.writeHead(200, {
-            'Content-Type': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-            "Access-Control-Allow-Origin": "*"
+
+    var q = url.parse(req.url, true);
+
+    var pathname = q.pathname;
+    var qdata = q.query;
+    if (qdata.msg && qdata.msg == "retrive") {
+        fs.readFile('documents/pinsara.docx', function(err, data) {
+            res.write(data);
+            return res.end();
         });
-        try {
+    } else {
 
-          var q = url.parse(adr, true);
-
-          var pathname = q.pathname;
-          var qdata = q.query;
-          if(qdata.msg=="retrive"){
-            fs.readFile('documents/pinsara.docx', function(err, data) {
-                res.write(data);
-                return res.end();
+        req.on('data', chunk => {
+            data.push(chunk)
+        });
+        req.on('end', () => {
+            res.writeHead(200, {
+                'Content-Type': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+                "Access-Control-Allow-Origin": "*"
             });
-          }
+            try {
 
-            var dat = JSON.parse(data);
 
-            if (dat.user) {
-                carbone.render('./test.docx', dat, function(err, result) {
-                    fs.writeFile('documents/' + dat.user + '.docx', result);
-                    fs.readFile('documents' + '/' + dat.user + '.docx', function(err, dee) {
-                        res.write(dee);
-                        return res.end();
+                var dat = JSON.parse(data);
+
+                if (dat.user) {
+                    carbone.render('./test.docx', dat, function(err, result) {
+                        fs.writeFile('documents/' + dat.user + '.docx', result);
+                        fs.readFile('documents' + '/' + dat.user + '.docx', function(err, dee) {
+                            res.write(dee);
+                            return res.end();
+                        });
                     });
+                } else {
+
+                }
+
+                //    if (err) {
+                //      return console.log(err);
+                //    }
+                //    // write the result
+
+
+                //  });
+
+            } catch (e) {
+                fs.readFile('./test.docx', function(err, data) {
+                    res.write(data);
+                    return res.end();
                 });
-            } else {
-
             }
+        });
 
-            //    if (err) {
-            //      return console.log(err);
-            //    }
-            //    // write the result
-
-
-            //  });
-
-        } catch (e) {
-            fs.readFile('./test.docx', function(err, data) {
-                res.write(data);
-                return res.end();
-            });
-        }
-    });
-
-
+    }
 
     // return res.end("ok i am bad");
     //   try{
