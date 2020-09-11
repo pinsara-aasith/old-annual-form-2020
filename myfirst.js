@@ -64,7 +64,7 @@
               // window.URL.revokeObjectURL(url);
               var req = JSON.parse(xmlhttp.response);
               if(req.name){
-                window.open("https://detailprinter.cloudno.de?msg=retrive&&name=" + req.name, "_blank"); 
+                window.open("https://detailprinter.cloudno.de?msg=retrive&name=" + encodeURIComponent(req.name), "_blank"); 
               }
           }
       });
