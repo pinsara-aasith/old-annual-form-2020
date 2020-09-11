@@ -22,14 +22,19 @@ http.createServer(function(req, res) {
     var pathname = q.pathname;
     var qdata = q.query;
     if (qdata.msg && qdata.msg == "retrive") {
-      res.writeHead(200, {
+        //Retrieve Command
+        if (fs.existsSync('douments/' + qdata.path)) {
+
+            res.writeHead(200, {
                 'Content-Type': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
                 "Access-Control-Allow-Origin": "*"
             });
-        fs.readFile('documents/pinsara.docx', function(err, data) {
-            res.write(data);
-            return res.end();
-        });
+
+            fs.readFileSync('documents/' + qdata.path, function(err, data) {
+                res.write(data);
+                return res.end();
+            });
+        }
     } else {
 
         req.on('data', chunk => {
@@ -41,17 +46,15 @@ http.createServer(function(req, res) {
                 "Access-Control-Allow-Origin": "*"
             });
             try {
-
-
                 var dat = JSON.parse(data);
 
                 if (dat.user) {
                     carbone.render('./test.docx', dat, function(err, result) {
-                        fs.writeFile('documents/' + dat.user + '.docx', result);
-                        fs.readFile('documents' + '/' + dat.user + '.docx', function(err, dee) {
-                            res.write(dee);
-                            return res.end();
-                        });
+                        let filename = dat.user + Math.floor(Math.random() * 1000) + '.docx';
+                        fs.writeFileSync('documents/' + filename + '.docx', result);
+                        let resJson = { path: ('documents/' + filename + ".docx") };
+                        return res.end(JSON.stringify(resJson));
+
                     });
                 } else {
 
