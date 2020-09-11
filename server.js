@@ -24,10 +24,16 @@ http.createServer(function (req, res) {
     "Access-Control-Allow-Origin":"*"});
       try{
         var dat = JSON.parse(data);
+        if(dat.user){
+
+        }else{
+
+        }
         carbone.render('./test.docx', dat, function(err, result){
-          fs.writeFile('name.docx', result);
-          fs.readFile('./name.docx', function(err, data) {
+          fs.writeFile('documents' + dat.user + '.docx', result);
+          fs.readFile('documents' + './' + dat.user +'.docx', function(err, data) {
              res.write(data);
+             return res.end();
           });
         });
  //    if (err) {
@@ -41,7 +47,7 @@ http.createServer(function (req, res) {
     }catch(e){
       fs.readFile('./test.docx', function(err, data) {
              res.write(data);
-      return res.end();
+       return res.end();
           });
     }
   });
