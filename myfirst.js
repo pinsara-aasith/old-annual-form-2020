@@ -13,6 +13,7 @@ xmlhttp.onreadystatechange=cfunc;
 xmlhttp.open("POST","http://detailprinter.cloudno.de",true);
 
 var data = {
+  user: "pinsara",
   firstname : 'Hesandi',
   lastname : 'Aasith'
 };
