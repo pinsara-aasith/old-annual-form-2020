@@ -7,14 +7,14 @@
           xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
       }
       xmlhttp.onreadystatechange = cfunc;
-      xmlhttp.open("POST", "http://detailprinter.cloudno.de", true);
+      xmlhttp.open("POST", "http://detailprinter.cloudno.de?msg=retrive", true);
 
-      var data = {
-          user: "pinsara",
-          firstname: 'Hesandi',
-          lastname: 'Aasith'
-      };
-      xmlhttp.send(JSON.stringify(data));
+      // var data = {
+      //     user: "pinsara",
+      //     firstname: 'Hesandi',
+      //     lastname: 'Aasith'
+      // };
+      xmlhttp.send();
   }
 
 
@@ -25,6 +25,26 @@
           firstname: 'Hesandi',
           lastname: 'Mallawarachchi'
       };
+
+      loadXMLDoc(function() {
+          if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+              var blob = new Blob([xmlhttp.response], { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
+              var url = window.URL.createObjectURL(blob);
+              var a = document.createElement('a');
+              alert(xmlhttp.response);
+              a.href = url;
+              a.download = 'downloaeed.docx';
+              document.body.append(a);
+              a.click();
+              a.remove();
+              window.URL.revokeObjectURL(url);
+
+          }
+      });
+  }
+
+  function downloadSample() {
+      alert("ready To be download");
 
       loadXMLDoc(function() {
           if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
