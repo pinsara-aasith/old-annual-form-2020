@@ -28,7 +28,6 @@ http.createServer(function (req, res) {
           fs.writeFile('name.docx', result);
           fs.readFile('name.docx', function(err, data) {
              res.write(data);
-            return res.end();
           });
         });
  //    if (err) {
