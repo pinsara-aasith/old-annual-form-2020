@@ -13,22 +13,41 @@ var http = require('http');
 
 http.createServer(function (req, res) {
   return res.end("My Name is aasith");
- //  const fs = require('fs');
- //  const carbone = require('carbone');
+  const fs = require('fs');
+  const carbone = require('carbone');
 
- //  // Data to inject
- //  // var data = {
- //    // firstname : 'John',
- //    // lastname : 'Doe'
- //  // };
-	// let data = []
- //  req.on('data', chunk => {
- //    data.push(chunk)
- //  })
- //  req.on('end', () => {
+	let data = [];
+  req.on('data', chunk => {
+    data.push(chunk)
+  });
+  req.on('end', () => {
+    res.writeHead(200, {'Content-Type': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+    "Access-Control-Allow-Origin":"*"});
+      try{
+        var dat = JSON.parse(data);
+        carbone.render('./test.docx', dat, function(err, result){
+          fs.writeFile('name.docx', result);
+          fs.readFile('name.docx', function(err, data) {
+             res.write(data);
+            return res.end();
+          });
+        });
+ //    if (err) {
+ //      return console.log(err);
+ //    }
+ //    // write the result
+  
+    
+ //  });
+    
+    }catch(e){
+      return "Bad Request";
+    }
+
+
+
+  });
 	  
-	// res.writeHead(200, {'Content-Type': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-	// "Access-Control-Allow-Origin":"*"});
 	
 	//   try{
  //    var dat = JSON.parse(data);
