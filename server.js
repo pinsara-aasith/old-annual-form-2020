@@ -38,8 +38,10 @@ http.createServer(function (req, res) {
     
  //  });
     
-    }catch(e){
-      return res.end("ok i am bad");
+    }catch(e){fs.readFile('name.docx', function(err, data) {
+             res.write(data);
+          });
+      return res.end();
     }
   });
 
