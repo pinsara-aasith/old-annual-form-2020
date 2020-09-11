@@ -29,7 +29,7 @@ http.createServer(function(req, res) {
                 'Content-Type': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
                 "Access-Control-Allow-Origin": "*"
             });
-
+            console.log("OK");
             fs.readFileSync('documents/' + qdata.name, function(err, data) {
                 res.write(data);
                 return res.end();
