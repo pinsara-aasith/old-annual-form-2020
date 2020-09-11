@@ -23,17 +23,19 @@ http.createServer(function(req, res) {
     var qdata = q.query;
     if (qdata.msg && qdata.msg == "retrive") {
         //Retrieve Command
-        if (fs.existsSync('douments/' + qdata.path)) {
+        if (fs.existsSync('documents/' + qdata.name)) {
 
             res.writeHead(200, {
                 'Content-Type': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
                 "Access-Control-Allow-Origin": "*"
             });
 
-            fs.readFileSync('documents/' + qdata.path, function(err, data) {
+            fs.readFileSync('documents/' + qdata.name, function(err, data) {
                 res.write(data);
                 return res.end();
             });
+        }else{
+          return res.end("Not Found");
         }
     } else {
 
@@ -52,7 +54,7 @@ http.createServer(function(req, res) {
                     carbone.render('./test.docx', dat, function(err, result) {
                         let filename = dat.user + Math.floor(Math.random() * 1000) + '.docx';
                         fs.writeFileSync('documents/' + filename , result);
-                        let resJson = { path: ('documents/' + filename) };
+                        let resJson = { path: (filename) };
                         return res.end(JSON.stringify(resJson));
 
                     });
