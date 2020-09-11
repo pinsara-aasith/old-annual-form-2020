@@ -14,7 +14,7 @@ var http = require('http');
 http.createServer(function(req, res) {
     const fs = require('fs');
     const carbone = require('carbone');
-
+    var url = require('url');
     let data = [];
     req.on('data', chunk => {
         data.push(chunk)
@@ -25,8 +25,20 @@ http.createServer(function(req, res) {
             "Access-Control-Allow-Origin": "*"
         });
         try {
+
+          var q = url.parse(adr, true);
+
+          var pathname = q.pathname;
+          var qdata = q.query;
+          if(qdata.msg=="retrive"){
+            fs.readFile('documents/pinsara.docx', function(err, data) {
+                res.write(data);
+                return res.end();
+            });
+          }
+
             var dat = JSON.parse(data);
-            
+
             if (dat.user) {
                 carbone.render('./test.docx', dat, function(err, result) {
                     fs.writeFile('documents/' + dat.user + '.docx', result);
