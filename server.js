@@ -54,9 +54,8 @@ http.createServer(function(req, res) {
                     carbone.render('./test.docx', dat, function(err, result) {
                         let filename = dat.user + Math.floor(Math.random() * 1000) + '.docx';
                         fs.writeFileSync('documents/' + filename , result);
-                        let resJson = { path: (filename) };
+                        let resJson = { name: (filename) };
                         return res.end(JSON.stringify(resJson));
-
                     });
                 } else {
 
