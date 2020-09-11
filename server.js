@@ -1,18 +1,17 @@
-const fs = require('fs');
-const carbone = require('carbone');
+// const fs = require('fs');
+// const carbone = require('carbone');
 
 // Data to inject
-var data = {
-  firstname : 'John',
-  lastname : 'Doe'
-};
+// var data = {
+//   firstname : 'John',
+//   lastname : 'Doe'
+// };
 // Generate a report using the sample template provided by carbone module
 // This LibreOffice template contains "Hello {d.firstname} {d.lastname} !"
 // Of course, you can create your own templates!
 var http = require('http');
 
 http.createServer(function (req, res) {
-  return res.end("My Name is aasith");
   const fs = require('fs');
   const carbone = require('carbone');
 
