@@ -52,17 +52,20 @@
 
       loadXMLDoc(function() {
           if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-              var blob = new Blob([xmlhttp.response], { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
-              var url = window.URL.createObjectURL(blob);
-              var a = document.createElement('a');
-              alert(xmlhttp.response);
-              a.href = url;
-              a.download = 'downloaeed.docx';
-              document.body.append(a);
-              a.click();
-              a.remove();
-              window.URL.revokeObjectURL(url);
-
+              // var blob = new Blob([xmlhttp.response], { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
+              // var url = window.URL.createObjectURL(blob);
+              // var a = document.createElement('a');
+              // alert(xmlhttp.response);
+              // a.href = url;
+              // a.download = 'downloaeed.docx';
+              // document.body.append(a);
+              // a.click();
+              // a.remove();
+              // window.URL.revokeObjectURL(url);
+              var req = JSON.parse(xmlhttp.response);
+              if(req.path){
+                window.open("https://detailprinter.cloudno.de?msg=retrive&&path=" + req.path, "_blank"); 
+              }
           }
       });
   }
