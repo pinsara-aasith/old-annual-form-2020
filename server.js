@@ -26,7 +26,7 @@ http.createServer(function (req, res) {
         var dat = JSON.parse(data);
         carbone.render('./test.docx', dat, function(err, result){
           fs.writeFile('name.docx', result);
-          fs.readFile('name.docx', function(err, data) {
+          fs.readFile('./name.docx', function(err, data) {
              res.write(data);
           });
         });
@@ -38,7 +38,7 @@ http.createServer(function (req, res) {
     
  //  });
     
-    }catch(e){fs.readFile('name.docx', function(err, data) {
+    }catch(e){fs.readFile('./test.docx', function(err, data) {
              res.write(data);
           });
       return res.end();
