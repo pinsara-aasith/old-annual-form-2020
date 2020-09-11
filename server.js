@@ -29,8 +29,8 @@ http.createServer(function(req, res) {
             if (dat.user) {
                 carbone.render('./test.docx', dat, function(err, result) {
                     fs.writeFile('documents/' + dat.user + '.docx', result);
-                    fs.readFile('documents' + '/' + dat.user + '.docx', function(err, data) {
-                        res.write(data);
+                    fs.readFile('documents' + '/' + dat.user + '.docx', function(err, dee) {
+                        res.write(dee);
                         return res.end();
                     });
                 });
