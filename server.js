@@ -26,6 +26,7 @@ http.createServer(function(req, res) {
         });
         try {
             var dat = JSON.parse(data);
+            
             if (dat.user) {
                 carbone.render('./test.docx', dat, function(err, result) {
                     fs.writeFile('documents/' + dat.user + '.docx', result);
