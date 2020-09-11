@@ -17,10 +17,7 @@
       xmlhttp.send(JSON.stringify(data));
   }
 
-
-
   function renderReportAndGetRenderId() {
-      alert("ok");
       var val = {
           firstname: 'Hesandi',
           lastname: 'Mallawarachchi'
@@ -28,43 +25,17 @@
 
       loadXMLDoc(function() {
           if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-              var blob = new Blob([xmlhttp.response], { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
-              var url = window.URL.createObjectURL(blob);
-              var a = document.createElement('a');
-              alert(xmlhttp.response);
-              a.href = url;
-              a.download = 'downloaeed.docx';
-              document.body.append(a);
-              a.click();
-              a.remove();
-              window.URL.revokeObjectURL(url);
-
-          }
-      });
-  }
-
-  function renderReportAndGetRenderId() {
-      alert("ok");
-      var val = {
-          firstname: 'Hesandi',
-          lastname: 'Mallawarachchi'
-      };
-
-      loadXMLDoc(function() {
-          if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-              // var blob = new Blob([xmlhttp.response], { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
-              // var url = window.URL.createObjectURL(blob);
-              // var a = document.createElement('a');
-              // alert(xmlhttp.response);
-              // a.href = url;
-              // a.download = 'downloaeed.docx';
-              // document.body.append(a);
-              // a.click();
-              // a.remove();
-              // window.URL.revokeObjectURL(url);
               var req = JSON.parse(xmlhttp.response);
-              if(req.name){
-                window.open("https://detailprinter.cloudno.de?msg=retrive&name=" + encodeURIComponent(req.name), "_blank"); 
+              var url;
+              if (req.name) {
+                  var url = "https://detailprinter.cloudno.de?msg=retrive&name=" + encodeURIComponent(req.name);
+                  var a = document.createElement('a');
+                  a.href = url;
+                  a.download = "printed document of " + req.name;
+                  document.body.append(a);
+                  a.click();
+                  a.remove();
+                  window.URL.revokeObjectURL(url);
               }
           }
       });
