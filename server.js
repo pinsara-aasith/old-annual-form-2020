@@ -50,10 +50,7 @@ http.createServer(function(req, res) {
 
                 }
             } catch (e) {
-                fs.readFile('./application_format.docx', function(err, data) {
-                    res.write(data);
-                    return res.end();
-                });
+                res.end("Error Parsing JSON Message...");
             }
         });
 
