@@ -7,14 +7,14 @@
           xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
       }
       xmlhttp.onreadystatechange = cfunc;
-      xmlhttp.open("POST", "http://detailprinter.cloudno.de?msg=retrive", true);
+      xmlhttp.open("POST", "http://detailprinter.cloudno.de", true);
 
-      // var data = {
-      //     user: "pinsara",
-      //     firstname: 'Hesandi',
-      //     lastname: 'Aasith'
-      // };
-      xmlhttp.send();
+      var data = {
+          user: "pinsara",
+          firstname: 'Hesandi',
+          lastname: 'Aasith'
+      };
+      xmlhttp.send(JSON.stringify(data));
   }
 
 
@@ -43,8 +43,12 @@
       });
   }
 
-  function downloadSample() {
-      alert("ready To be download");
+  function renderReportAndGetRenderId() {
+      alert("ok");
+      var val = {
+          firstname: 'Hesandi',
+          lastname: 'Mallawarachchi'
+      };
 
       loadXMLDoc(function() {
           if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
