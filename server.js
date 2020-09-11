@@ -22,6 +22,10 @@ http.createServer(function(req, res) {
     var pathname = q.pathname;
     var qdata = q.query;
     if (qdata.msg && qdata.msg == "retrive") {
+      res.writeHead(200, {
+                'Content-Type': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+                "Access-Control-Allow-Origin": "*"
+            });
         fs.readFile('documents/pinsara.docx', function(err, data) {
             res.write(data);
             return res.end();
