@@ -40,6 +40,8 @@ http.createServer(function(req, res) {
                 });
             }
         });
+        return res.end();
+
     } else {
 
         req.on('data', chunk => {
