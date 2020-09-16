@@ -85,7 +85,7 @@ http.createServer(function(req, res) {
         });
         var blob = { "message": null, "data": null };
         try {
-            const directory = 'data/';
+            const directory = 'documents/';
             var names = [];
             fs.readdir(directory, (err, files) => {
                 if (err) throw err;
@@ -97,6 +97,7 @@ http.createServer(function(req, res) {
                 blob.data = names;
                 blob.message = "success";
                
+                res.end(JSON.stringify(blob));
             });
         } catch (e) {
             blob.message = "error";
