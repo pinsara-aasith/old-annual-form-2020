@@ -85,22 +85,22 @@ http.createServer(function(req, res) {
         });
         var blob = { "message": null, "data": null };
         try {
-            const directory = 'documents/';
+            const directory = 'data/';
             var names = [];
             fs.readdir(directory, (err, files) => {
                 if (err) throw err;
 
                 for (const file of files) {
-                    names.push(file);console.log(file);
+                    names.push(file);
                 }
 
                 blob.data = names;
                 blob.message = "success";
                
-                res.end(JSON.stringify(blob));
             });
         } catch (e) {
             blob.message = "error";
+                res.end(JSON.stringify(blob));
         }
 
     } else {
