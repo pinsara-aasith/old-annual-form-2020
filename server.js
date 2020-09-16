@@ -52,7 +52,7 @@ http.createServer(function(req, res) {
                 'Content-Type': 'application/json',
                 "Access-Control-Allow-Origin": "*"
             });
-            var msg = { "message": null };
+            var blob = { "message": null };
             try {
                 var dat = JSON.parse(data);
                 if (dat.user) {
@@ -69,13 +69,38 @@ http.createServer(function(req, res) {
                     let details = JSON.stringify(dat);
                     fs.writeFileSync('documents/' + 'file' + generateNo + '.json', details);
                 }
-                msg.message = "success";
+                blob.message = "success";
             } catch (e) {
-                msg.message = "error";
+                blob.message = "error";
             }
         });
 
-        return res.end(JSON.stringify(msg));
+        return res.end(JSON.stringify(blob));
+
+    } else if (qdata.msg == "get") {
+
+        res.writeHead(200, {
+            'Content-Type': 'application/json',
+            "Access-Control-Allow-Origin": "*"
+        });
+        var blob = { "message": null,"data":null };
+        try {
+            const directory = 'data';
+            var names = [];
+            fs.readdir(directory, (err, files) => {
+                if (err) throw err;
+
+                for (const file of files) {
+                    names.push(file);
+                   
+                }
+            });
+            blob.message = "success";
+        } catch (e) {
+            blob.message = "error";
+        }
+
+        return res.end(JSON.stringify(blob));
 
     } else {
 
