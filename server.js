@@ -83,7 +83,7 @@ http.createServer(function(req, res) {
             'Content-Type': 'application/json',
             "Access-Control-Allow-Origin": "*"
         });
-        var blob = { "message": null,"data":null };
+        var blob = { "message": null, "data": null };
         try {
             const directory = 'documents/';
             var names = [];
@@ -93,14 +93,15 @@ http.createServer(function(req, res) {
                 for (const file of files) {
                     names.push(file);
                 }
+
+                blob.data = names;
+                blob.message = "success";
+                res.end(JSON.stringify(blob));
             });
-            blob.data = names;
-            blob.message = "success";
         } catch (e) {
             blob.message = "error";
         }
 
-        return res.end(JSON.stringify(blob));
 
     } else {
 
