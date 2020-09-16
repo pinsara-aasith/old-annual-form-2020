@@ -48,10 +48,6 @@ http.createServer(function(req, res) {
             data.push(chunk)
         });
         req.on('end', () => {
-            res.writeHead(200, {
-                'Content-Type': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-                "Access-Control-Allow-Origin": "*"
-            });
             try {
                 var dat = JSON.parse(data);
                 if (dat.user) {
