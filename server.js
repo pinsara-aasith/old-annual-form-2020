@@ -29,7 +29,7 @@ http.createServer(function(req, res) {
         }
     } else if (qdata.msg == "clean") {
 
-        const directory = 'documents';
+        const directory = 'documents/';
 
         fs.readdir(directory, (err, files) => {
             if (err) throw err;
@@ -85,7 +85,7 @@ http.createServer(function(req, res) {
         });
         var blob = { "message": null,"data":null };
         try {
-            const directory = 'data';
+            const directory = 'documents/';
             var names = [];
             fs.readdir(directory, (err, files) => {
                 if (err) throw err;
