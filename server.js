@@ -92,7 +92,7 @@ http.createServer(function(req, res) {
 
                 for (const file of files) {
                     names.push(file);
-                   
+                    res.write("ok");
                 }
             });
             blob.data = names;
