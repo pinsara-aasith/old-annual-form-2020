@@ -42,6 +42,38 @@ http.createServer(function(req, res) {
         });
         return res.end();
 
+    } else if (qdata.msg == "save") {
+
+        req.on('data', chunk => {
+            data.push(chunk)
+        });
+        req.on('end', () => {
+            res.writeHead(200, {
+                'Content-Type': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+                "Access-Control-Allow-Origin": "*"
+            });
+            try {
+                var dat = JSON.parse(data);
+                if (dat.user) {
+                    let generateNo = Math.floor(
+                        Math.random() * (124620 - mi)
+                    );
+                    if (fs.existsSync('documents/' + 'file' + generateNo + '.json')) {
+                        generateNo = generateNo * 10;
+                    }
+
+                    let details = JSON.stringify(dat);
+                    fs.writeFileSync('documents/' + 'file' + generateNo + '.json', details);
+                } else {
+
+                }
+            } catch (e) {
+                res.end("Error Parsing JSON Message...");
+            }
+        });
+
+        return res.end();
+
     } else {
 
         req.on('data', chunk => {
