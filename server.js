@@ -95,6 +95,7 @@ http.createServer(function(req, res) {
                    
                 }
             });
+            blob.data = names;
             blob.message = "success";
         } catch (e) {
             blob.message = "error";
