@@ -104,7 +104,7 @@ http.createServer(function(req, res) {
             console.log(e);
                 return res.end(JSON.stringify(blob));
         }
-
+return res.end(JSON.stringify(blob));
     } else {
 
         req.on('data', chunk => {
