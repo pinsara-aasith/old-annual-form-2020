@@ -87,12 +87,11 @@ http.createServer(function(req, res) {
         try {
             const directory = 'documents/';
             var names = [];
-            fs.readdir(directory, (err, files) => {
+            fs.readdirSync(directory, (err, files) => {
                 if (err) throw err;
 
                 for (const file of files) {
                     names.push(file);
-                    res.write("ok");
                 }
             });
             blob.data = names;
