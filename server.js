@@ -48,27 +48,34 @@ http.createServer(function(req, res) {
             data.push(chunk)
         });
         req.on('end', () => {
+            res.writeHead(200, {
+                'Content-Type': 'application/json',
+                "Access-Control-Allow-Origin": "*"
+            });
+            var msg = { "message": null };
             try {
                 var dat = JSON.parse(data);
                 if (dat.user) {
-                    let generateNo = Math.floor(
-                        Math.random() * (124620 - mi)
-                    );
+                    var d = new Date();
+
+                    let generateNo = d.getTime();
+
                     if (fs.existsSync('documents/' + 'file' + generateNo + '.json')) {
-                        generateNo = generateNo * 10;
+                        generateNo = generateNo + Math.floor(
+                            Math.random() * (124620)
+                        );
                     }
 
                     let details = JSON.stringify(dat);
                     fs.writeFileSync('documents/' + 'file' + generateNo + '.json', details);
-                } else {
-
                 }
+                msg.message = "success";
             } catch (e) {
-                res.end("Error Parsing JSON Message...");
+                msg.message = "error";
             }
         });
 
-        return res.end();
+        return res.end(JSON.stringify(msg));
 
     } else {
 
