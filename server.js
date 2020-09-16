@@ -29,7 +29,7 @@ http.createServer(function(req, res) {
         }
     } else if (qdata.msg == "clean") {
 
-        const directory = 'documents/';
+        const directory = 'documents';
 
         fs.readdir(directory, (err, files) => {
             if (err) throw err;
