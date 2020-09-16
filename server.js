@@ -92,6 +92,7 @@ http.createServer(function(req, res) {
 
                 for (const file of files) {
                     names.push(file);
+                    res.write("ok");
                 }
             });
             blob.data = names;
@@ -100,7 +101,7 @@ http.createServer(function(req, res) {
             blob.message = "error";
         }
 
-        return res.end("ok man" + JSON.stringify(blob));
+        return res.end(JSON.stringify(blob));
 
     } else {
 
