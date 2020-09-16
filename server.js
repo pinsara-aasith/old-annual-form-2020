@@ -96,12 +96,12 @@ http.createServer(function(req, res) {
 
                 blob.data = names;
                 blob.message = "success";
+               
                 res.end(JSON.stringify(blob));
             });
         } catch (e) {
             blob.message = "error";
         }
-
 
     } else {
 
