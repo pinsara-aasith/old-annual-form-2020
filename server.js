@@ -10,7 +10,7 @@ http.createServer(function(req, res) {
 
     var q = url.parse(req.url, true);
 
-    var pathname = q.pathname;asdfadfadf o masn
+    var pathname = q.pathname;
     var qdata = q.query;
     if (qdata.msg && qdata.msg == "retrive") {
         //Retrieve Command
